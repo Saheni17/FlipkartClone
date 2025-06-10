@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Men's Top Wear - Flipkart Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .product {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .product:hover {
+      transform: scale(1.03);
+    }
+    .wishlist-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .wishlist-icon.active {
+      color: red;
+    }
+    .product img {
+      width: 100%;
+      border-radius: 5px;
+    }
+    .product p {
+      margin: 10px 0;
+    }
+    .add-to-cart {
+      background-color: #2874f0;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .add-to-cart:hover {
+      background-color: #0b5ed7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo"><i class="fas fa-shopping-cart"></i> Flipkart</div>
+    <input type="text" placeholder="Search for Products, Brands and More" class="search-bar" />
+    <nav class="header-nav">
+      <a href="#"><i class="fas fa-user"></i> Login</a>
+      <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+      <a href="#"><i class="fas fa-store"></i> Become a Seller</a>
+    </nav>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <h2>Men's Top Wear</h2>
+    <p>Up to 70% Off | T-shirts, Shirts & More</p>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="products">
+    <h3>Top Picks for You</h3>
+    <div class="product-list">
+      <div class="product">
+        <i class="fas fa-heart wishlist-icon"></i>
+        <img src="https://via.placeholder.com/150?text=T-Shirt" alt="T-Shirt" />
+        <p>Classic White T-Shirt<br><strong>₹399</strong></p>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      </div>
+      <div class="product">
+        <i class="fas fa-heart wishlist-icon"></i>
+        <img src="https://via.placeholder.com/150?text=Shirt" alt="Shirt" />
+        <p>Formal Blue Shirt<br><strong>₹699</strong></p>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      </div>
+      <div class="product">
+        <i class="fas fa-heart wishlist-icon"></i>
+        <img src="https://via.placeholder.com/150?text=Polo" alt="Polo Shirt" />
+        <p>Striped Polo T-Shirt<br><strong>₹599</strong></p>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      </div>
+      <div class="product">
+        <i class="fas fa-heart wishlist-icon"></i>
+        <img src="https://via.placeholder.com/150?text=Hoodie" alt="Hoodie" />
+        <p>Casual Hoodie<br><strong>₹899</strong></p>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 20px;">
+    <a href="index.html" style="text-decoration: none; color: #2874f0;"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </footer>
+
+  <script>
+    // Toggle Wishlist
+    const wishlistIcons = document.querySelectorAll('.wishlist-icon');
+    wishlistIcons.forEach(icon => {
+      icon.addEventListener('click', () => {
+        icon.classList.toggle('active');
+      });
+    });
+
+    // Add to Cart functionality (Mock)
+    const cartButtons = document.querySelectorAll('.add-to-cart');
+    cartButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        alert('Added to cart!');
+      });
+    });
+  </script>
+    <script src="script.js"></script>
+</body>
+</html>
