@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Orders - Flipkart Style</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f1f2f4;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group h4 {
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .orders {
+      flex: 1;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .order-card {
+      background: #fff;
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .order-card img {
+      width: 80px;
+      height: 100px;
+      object-fit: cover;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .order-details {
+      flex: 1;
+    }
+
+    .order-details h3 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .order-details p {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #555;
+    }
+
+    .status {
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .status.cancelled {
+      color: #d32f2f;
+    }
+
+    .status.delivered {
+      color: #2e7d32;
+    }
+
+    .status.exchanged {
+      color: #f9a825;
+    }
+
+    .review-link {
+      margin-top: 8px;
+      display: inline-block;
+      color: #2874f0;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .review-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Sidebar Filters -->
+    <div class="sidebar">
+      <h2>Filters</h2>
+
+      <div class="filter-group">
+        <h4>ORDER STATUS</h4>
+        <label><input type="checkbox"> On the way</label>
+        <label><input type="checkbox"> Delivered</label>
+        <label><input type="checkbox"> Cancelled</label>
+        <label><input type="checkbox"> Returned</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>ORDER TIME</h4>
+        <label><input type="checkbox"> Last 30 days</label>
+        <label><input type="checkbox"> 2024</label>
+        <label><input type="checkbox"> 2023</label>
+        <label><input type="checkbox"> 2022</label>
+        <label><input type="checkbox"> Older</label>
+      </div>
+    </div>
+
+    <!-- Orders List -->
+    <div class="orders">
+      <div class="search-bar">
+        <input type="text" placeholder="Search your orders here" />
+      </div>
+
+      <!-- Order Card 1 -->
+      <div class="order-card">
+        <img src="https://via.placeholder.com/80x100" alt="Product" />
+        <div class="order-details">
+          <h3>Lugo Women Printed Beige Night Suit</h3>
+          <p>Color: Beige, Red &nbsp; Size: M</p>
+          <p>₹483</p>
+          <p class="status cancelled">Cancelled on Jun 11</p>
+        </div>
+      </div>
+
+      <!-- Order Card 2 -->
+      <div class="order-card">
+        <img src="https://via.placeholder.com/80x100" alt="Product" />
+        <div class="order-details">
+          <h3>LIBAS Women Kurta Pant Set</h3>
+          <p>Color: White &nbsp; Size: L</p>
+          <p>₹1,562</p>
+          <p class="status delivered">Delivered on Apr 20</p>
+          <a href="#" class="review-link">★ Rate & Review Product</a>
+        </div>
+      </div>
+
+      <!-- Order Card 3 -->
+      <div class="order-card">
+        <img src="https://via.placeholder.com/80x100" alt="Product" />
+        <div class="order-details">
+          <h3>LIBAS Women Kurta Pant Set</h3>
+          <p>Color: White &nbsp; Size: S</p>
+          <p>₹1,562</p>
+          <p class="status exchanged">Exchange Completed</p>
+          <p>You returned this order because you needed it in a larger size.</p>
+          <a href="#" class="review-link">★ Rate & Review Product</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

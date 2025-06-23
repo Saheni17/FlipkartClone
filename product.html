@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Preview - Flipkart Clone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f1f3f6;
+      color: #333;
+    }
+
+    .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2874f0;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+    .header a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .header a:hover {
+      color: #ffeb3b;
+    }
+    .header-nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: normal;
+    transition: color 0.2s;
+  }
+
+  .header-nav a:hover {
+    color: #ffeb3b;
+  }
+    .main-content {
+      display: flex;
+      max-width: 1400px;
+      margin: 30px auto;
+      align-items: flex-start;
+      flex-wrap: wrap;
+     
+  padding-top: 50px; /* Adjust if your header height changes */
+
+    }
+
+    .container {
+      flex: 2;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      padding: 30px;
+      gap: 40px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .image-section {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+    }
+
+    .main-image {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: #f9f9f9;
+      padding: 10px;
+      transition: transform 0.3s ease;
+      cursor: zoom-in;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .main-image:hover {
+      transform: scale(1.08);
+    }
+
+    .thumbnail-list {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      gap: 10px;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .details-section {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    .details-section h2 {
+      font-size: 28px;
+      color: #212121;
+      margin-bottom: 10px;
+    }
+
+    .rating {
+      display: inline-block;
+      background-color: #388e3c;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 26px;
+      color: #388e3c;
+      margin: 10px 0;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #878787;
+      margin-left: 10px;
+      font-size: 16px;
+    }
+
+    .offer {
+      color: #d32f2f;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .description {
+      margin: 20px 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .specs {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+
+    .specs h4 {
+      margin-bottom: 10px;
+    }
+
+    .specs ul {
+      padding-left: 20px;
+    }
+
+    .specs li {
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    .reviews {
+      border-top: 1px solid #ccc;
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+
+    .review-list p {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .wishlist-btn {
+      background: #2874f0;
+      color: #fff;
+      font-size: 16px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .explore-card-wrapper {
+      max-width: 1400px;
+      margin: 0 auto 30px auto;
+      overflow-x: auto;
+      padding: 0 20px 20px 20px;
+    }
+
+    .explore-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      padding: 25px 30px;
+      min-width: 1000px;
+    }
+
+    .explore-card h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .qty-btn {
+      background-color: #2874f0;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .qty-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .product-list {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .product {
+  min-width: 140px;
+  flex-shrink: 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  background: #f9f9f9;
+  text-align: center;
+}
+    .product:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .product-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.product-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.product-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+    .product img {
+  width: 100%;
+  height: 150px; /* Fixed height */
+  object-fit: contain; /* Ensures the image fits nicely */
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: #fff; /* Optional: for consistent background */
+}
+    .product p {
+      font-size: 16px;
+      color: #333;
+      margin: 0;
+    }
+      /* Toast styles */
+      .toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #323232;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 14px 20px;
+      position: fixed;
+      z-index: 9999;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.5s ease, bottom 0.5s ease;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+    @media (max-width: 768px) {
+      .main-content {
+        flex-direction: column;
+      }
+
+      .container {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .image-section,
+      .details-section {
+        text-align: center;
+      }
+
+      .explore-card-wrapper {
+        padding: 0 10px;
+      }
+
+      .product {
+        width: 150px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- <div class="header">
+    <div><i class="fas fa-box-open"></i> Product Preview</div>
+    <a href="wishlist.html"><i class="fas fa-heart"></i> Back to Wishlist</a>
+  </div> -->
+  <header class="header">
+    <div><i class="fas fa-box-open"></i> Product Preview</div>
+    <!-- <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search wishlist...">
+      <i class="fas fa-moon" title="Toggle Dark Mode"></i>
+      <label class="switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+      </label>
+    </div> -->
+    <nav class="header-nav">
+      <a href="wishlist.html"><i class="fas fa-heart"></i> Back to Wishlist</a>
+      <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <!-- <a href="#"><i class="fas fa-envelope"></i> Contact Us</a> -->
+      <a href="#"><i class="fas fa-info-circle"></i></a>
+    </nav>
+  </header>
+
+  <div class="main-content">
+    <div class="container" id="product-details">
+      Loading product details...
+    </div>
+  </div>
+
+  <div class="explore-card-wrapper">
+    <div class="explore-card">
+      <h3>Explore More</h3>
+      <div class="product-list">
+        <div class="product"><img src="assets/men1.jpg" alt=""><p>White T-Shirt<br><strong>₹399</strong></p></div>
+        <div class="product"><img src="assets/men2.jpg" alt=""><p>Blue Shirt<br><strong>₹699</strong></p></div>
+        <div class="product"><img src="assets/men3.jpg" alt=""><p>Polo Shirt<br><strong>₹599</strong></p></div>
+        <div class="product"><img src="assets/men4.jpg" alt=""><p>Grey Hoodie<br><strong>₹899</strong></p></div>
+        <div class="product"><img src="assets/top2.webp" alt=""><p>Grey Hoodie<br><strong>₹899</strong></p></div>
+        <div class="product"><img src="assets/top2.webp" alt=""><p>Grey Hoodie<br><strong>₹899</strong></p></div>
+        <div class="product"><img src="assets/top2.webp" alt=""><p>Grey Hoodie<br><strong>₹899</strong></p></div>
+        <div class="product"><img src="assets/top2.webp" alt=""><p>Grey Hoodie<br><strong>₹899</strong></p></div>
+        <div class="product"><img src="assets/top2.webp" alt=""><p>Grey Hoodie<br><strong>₹899</strong></p></div> 
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5 .3.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ 6.4.0/css/brands.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ 6.4.0/css/solid.min.css" /> 
+  <script>
+     function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.className = "toast show";
+      setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+      }, 3000);
+    }
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const product = wishlist.find(p => p.id === productId);
+
+    const container = document.getElementById("product-details");
+
+    if (product) {
+      const originalPrice = Math.round(product.price * 1.3);
+      const rating = (Math.random() * 2 + 3).toFixed(1);
+      const imageUrls = [
+        product.image,
+        "assets/top2.webp",
+        "assets/top3.webp",
+        "assets/top4.webp",
+      ];
+
+      let stockKey = `stock_${product.id}`;
+      let stock = localStorage.getItem(stockKey);
+      if (stock === null) {
+        stock = 10;
+        localStorage.setItem(stockKey, stock);
+      }
+      stock = parseInt(stock, 10);
+
+      container.innerHTML = `
+        <div class="image-section">
+          <img src="${imageUrls[0]}" class="main-image" id="mainImage" alt="${product.name}" />
+          <div class="thumbnail-list">
+            ${imageUrls.map((img) => `<img src="${img}" class="thumbnail" onclick="changeMainImage('${img}')">`).join("")}
+          </div>
+          <div style="margin-top: 15px;">
+            <button onclick="addToCart('${product.id}')" class="wishlist-btn" style="margin-right: 10px;">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+            <button onclick="buyNow('${product.id}')" class="wishlist-btn" style="background: #d32f2f;">
+              <i class="fas fa-bolt"></i> Buy Now
+            </button>
+          </div>
+        </div>
+
+        <div class="details-section">
+          <h2>${product.name}</h2>
+          <div class="rating"><i class="fas fa-star"></i> ${rating} ★</div>
+          <p class="price">₹${product.price} <span class="original-price">₹${originalPrice}</span></p>
+          <p class="offer">Extra ₹${originalPrice - product.price} off</p>
+          <p class="description">Enjoy amazing features and performance with the all-new <strong>${product.name}</strong>.</p>
+
+          <div style="margin: 15px 0;">
+            <label style="font-weight: bold;">Quantity:</label>
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+              <button onclick="decreaseQty()" class="qty-btn">−</button>
+              <span id="quantityDisplay" style="min-width: 30px; text-align: center;">1</span>
+              <button onclick="increaseQty()" class="qty-btn">+</button>
+              <span style="margin-left: 20px;">(Stock: <span id="stockCount">${stock}</span>)</span>
+            </div>
+            <p style="margin-top: 10px;">Total Price: ₹<span id="totalPrice">${product.price}</span></p>
+          </div>
+
+          <div class="specs">
+            <h4>Specifications</h4>
+            <ul>
+              <li><strong>Brand:</strong> FlipTrend</li>
+              <li><strong>Category:</strong> Clothing</li>
+              <li><strong>Material:</strong> Premium Cotton Blend</li>
+              <li><strong>Color Options:</strong> White, Blue, Black</li>
+              <li><strong>Size Available:</strong> S, M, L, XL</li>
+              <li><strong>Warranty:</strong> 1 Year</li>
+            </ul>
+          </div>
+
+          <div class="reviews">
+            <h4>Customer Reviews</h4>
+            <div class="review-list" id="reviewList">
+              <p><strong>Amit:</strong> Loved the fabric and fit! ⭐⭐⭐⭐⭐</p>
+              <p><strong>Priya:</strong> Stylish and comfortable. Will buy again! ⭐⭐⭐⭐☆</p>
+              <p><strong>Rohit:</strong> Value for money. ⭐⭐⭐⭐☆</p>
+            </div>
+            <textarea id="reviewText" rows="3" style="width:100%; margin-top:10px;" placeholder="Write your review..."></textarea>
+            <div style="margin-top: 10px;">
+              <span>Rate this product: </span>
+              <span id="starPreview" style="cursor:pointer; font-size: 20px;">
+                <span onclick="setRating(1)">⭐</span>
+                <span onclick="setRating(2)">⭐</span>
+                <span onclick="setRating(3)">⭐</span>
+                <span onclick="setRating(4)">⭐</span>
+                <span onclick="setRating(5)">⭐</span>
+              </span>
+            </div>
+            <button onclick="submitReview()" style="margin-top:8px; padding:8px 16px; background:#2874f0; color:#fff; border:none; border-radius:5px; cursor:pointer;">Submit Review</button>
+          </div>
+        </div>
+      `;
+
+      // Variables and functions after rendering
+      window.quantity = 1;
+      window.stock = stock;
+      window.stockKey = stockKey;
+      window.product = product;
+      updateTotal();
+    } else {
+      container.innerHTML = `<p style="text-align:center; font-size: 18px;">Product not found.</p>`;
+    }
+
+    function updateTotal() {
+      const total = product.price * quantity;
+      document.getElementById("quantityDisplay").textContent = quantity;
+      document.getElementById("totalPrice").textContent = total;
+    }
+
+    function increaseQty() {
+      if (quantity < stock) {
+        quantity++;
+        updateTotal();
+      } else {
+        alert("No more stock available.");
+      }
+    }
+
+    function decreaseQty() {
+      if (quantity > 1) {
+        quantity--;
+        updateTotal();
+      }
+    }
+
+    function changeMainImage(src) {
+      document.getElementById("mainImage").src = src;
+    }
+
+    function addToCart(id) {
+      if (quantity > stock) {
+        alert("Not enough stock available.");
+        return;
+      }
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(item => item.id === id);
+
+      if (existing) {
+        if (existing.quantity + quantity > stock) {
+          alert("Exceeds available stock.");
+          return;
+        }
+        existing.quantity += quantity;
+        existing.total = existing.quantity * product.price;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: quantity,
+          total: quantity * product.price,
+          image: product.image
+        });
+      }
+
+      stock -= quantity;
+      localStorage.setItem(stockKey, stock);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("stockCount").textContent = stock;
+      updateTotal();
+      alert(`Added to cart (x${quantity})`);
+    }
+
+    function buyNow(id) {
+      if (quantity > stock) {
+        alert("Not enough stock to purchase.");
+        return;
+      }
+
+      stock -= quantity;
+      localStorage.setItem(stockKey, stock);
+      document.getElementById("stockCount").textContent = stock;
+      updateTotal();
+
+      alert(`You bought "${product.name}" (x${quantity}) for ₹${product.price * quantity}`);
+    }
+
+    let currentRating = 0;
+
+    function setRating(rating) {
+      currentRating = rating;
+      const starSpan = document.getElementById("starPreview");
+      starSpan.innerHTML = "";
+      for (let i = 1; i <= 5; i++) {
+        starSpan.innerHTML += `<span onclick="setRating(${i})" style="color:${i <= rating ? '#ffbf00' : '#ccc'};">⭐</span>`;
+      }
+    }
+
+    function submitReview() {
+      const text = document.getElementById("reviewText").value.trim();
+      if (text === "") return;
+      const reviewDiv = document.getElementById("reviewList");
+
+      let stars = "⭐".repeat(currentRating || 5) + "☆".repeat(5 - (currentRating || 5));
+      if (text.toLowerCase().includes("bad")) {
+        stars = "⭐☆☆☆☆";
+      }
+
+      reviewDiv.innerHTML += `<p><strong>You:</strong> ${text} ${stars}</p>`;
+      document.getElementById("reviewText").value = "";
+      setRating(0);
+    }
+    function increaseQty() {
+      if (quantity < stock) {
+        quantity++;
+        updateTotal();
+      } else {
+        showToast("No more stock available.");
+      }
+    }
+
+    function decreaseQty() {
+      if (quantity > 1) {
+        quantity--;
+        updateTotal();
+      }
+    }
+
+    function changeMainImage(src) {
+      document.getElementById("mainImage").src = src;
+    }
+
+    function addToCart(id) {
+      if (quantity > stock) {
+        showToast("Not enough stock available.");
+        return;
+      }
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(item => item.id === id);
+
+      if (existing) {
+        if (existing.quantity + quantity > stock) {
+          showToast("Exceeds available stock.");
+          return;
+        }
+        existing.quantity += quantity;
+        existing.total = existing.quantity * product.price;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: quantity,
+          total: quantity * product.price,
+          image: product.image
+        });
+      }
+
+      stock -= quantity;
+      localStorage.setItem(stockKey, stock);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("stockCount").textContent = stock;
+      updateTotal();
+      showToast(`Added to cart (x${quantity})`);
+    }
+
+    function buyNow(id) {
+      if (quantity > stock) {
+        showToast("Not enough stock to purchase.");
+        return;
+      }
+
+      stock -= quantity;
+      localStorage.setItem(stockKey, stock);
+      document.getElementById("stockCount").textContent = stock;
+      updateTotal();
+      showToast(`Purchased ${product.name} (x${quantity}) for ₹${product.price * quantity}`);
+    }
+  </script>
+</body>
+</html>

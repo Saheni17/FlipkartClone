@@ -4,17 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Flipkart Clone</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <link rel="icon" href="assets/logo.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- 🌓 Dark Mode Preload Script -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  </script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+
 
   <!-- Header -->
   <header class="header">
-    <div class="logo"><i class="fas fa-shopping-cart"></i> Flipkart</div>
+    <div class="logo"><i class="fas fa-shopping-cart"></i> Demokart</div>
     <div class="search-bar">
       <input type="text" placeholder="Search for Products, Brands and More" />
       <i class="fas fa-search"></i>
@@ -22,17 +28,26 @@
     <nav>
       <ul>
         <li><a href="#" id="loginLink"><i class="fas fa-user"></i> Login</a></li>
-        <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
         <li><a href="#"><i class="fas fa-store"></i> Become a Seller</a></li>
+        <li class="dark-toggle">
+          <i class="fas fa-moon" title="Toggle Dark Mode"></i>
+          <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+          </label>
+        </li>
       </ul>
     </nav>
+    
   </header>
 
   <!-- Categories -->
   <div class="categories">
     <div class="dropdown">
       <div class="dropdown-toggle">
-        <i class="fas fa-tshirt"></i> Fashion <i class="fas fa-caret-down"></i>
+        <img src="assets/men2.jpg" alt="Fashion" class="cat-img" />
+        Fashion <i class="fas fa-caret-down"></i>
       </div>
       <div class="dropdown-menu">
         <a href="mens-topwear.html">👕 Men's Top Wear</a>
@@ -43,27 +58,33 @@
         <a href="#">🎒 Accessories</a>
       </div>
     </div>
-    <div><i class="fas fa-mobile-alt"></i> Mobiles</div>
-    <div><i class="fas fa-laptop"></i> Electronics</div>
-    <div><i class="fas fa-couch"></i> Furniture</div>
-    <div><i class="fas fa-blender"></i> Appliances</div>
-    <div><i class="fas fa-plane"></i> Flights</div>
-    <div><i class="fas fa-motorcycle"></i> Two Wheelers</div>
-    <div><i class="fas fa-gift"></i> Toys & More</div>
+    <div><img src="assets/product1.jpg" alt="Mobiles" class="cat-img" /> Mobiles</div>
+    <div><img src="assets/product3.jpg" alt="Electronics" class="cat-img" /> Electronics</div>
+    <div><img src="assets/furniture.jpg" alt="Furniture" class="cat-img" /> Furniture</div>
+    <div><img src="assets/product5.jpg" alt="Appliances" class="cat-img" /> Appliances</div>
+    <div><img src="assets/flights.jpg" alt="Flights" class="cat-img" /> Flights</div>
+    <div><img src="assets/bike.jpg" alt="Two Wheelers" class="cat-img" /> Two Wheelers</div>
+    <div><img src="assets/toys.jpg" alt="Toys" class="cat-img" /> Toys & More</div>
   </div>
 
   <!-- Banner -->
   <section id="banner" class="banner">
-    <h2 id="banner-title">Fun on wheels! Min. 40% Off</h2>
-    <p id="banner-subtitle">Electric ride-ons & more</p>
+    <img src="assets/banner1.jpg" alt="Banner Image" class="banner-image" id="banner-image" />
+    <div class="banner-overlay">
+      <div class="banner-content glass">
+        <h2 id="banner-title">Fun on wheels! Min. 40% Off</h2>
+        <p id="banner-subtitle">Electric ride-ons & more</p>
+      </div>
+    </div>
     <div id="banner-prev" class="banner-arrow">&#10094;</div>
     <div id="banner-next" class="banner-arrow">&#10095;</div>
   </section>
+  <div class="view-more-arrow"><i class="fas fa-chevron-down"></i></div>  
 
   <!-- Featured Deals -->
   <section class="featured-deals">
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Fashion" />
+      <img src="assets/men11.jpg" alt="Fashion" />
       <div class="card-info">
         <h3>Fashion Fiesta</h3>
         <p>Flat 60% off on apparel</p>
@@ -77,7 +98,7 @@
       </div>
     </div>
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1468071174046-657d9d351a40?auto=format&fit=crop&w=800&q=80" alt="Electronics" />
+      <img src="assets/product9.jpg" alt="Electronics" />
       <div class="card-info">
         <h3>Electronics Galore</h3>
         <p>Best prices on gadgets</p>
@@ -88,28 +109,32 @@
   <!-- Products -->
   <section class="products">
     <div class="product-card">
-      <img src="https://via.placeholder.com/200" alt="Product 1" />
+      <span class="offer-tag">Exciting Offer</span>
+      <img src="assets/Product1.jpg" alt="Product 1" />
       <div class="product-info">
         <h4>Product 1</h4>
         <p class="price">₹499</p>
       </div>
     </div>
     <div class="product-card">
-      <img src="https://via.placeholder.com/200" alt="Product 2" />
+      <span class="offer-tag">Exciting Offer</span>
+      <img src="assets/Product2.jpg" alt="Product 2" />
       <div class="product-info">
         <h4>Product 2</h4>
         <p class="price">₹799</p>
       </div>
     </div>
     <div class="product-card">
-      <img src="https://via.placeholder.com/200" alt="Product 3" />
+      <span class="offer-tag">Exciting Offer</span>
+      <img src="assets/Product3.jpg" alt="Product 3" />
       <div class="product-info">
         <h4>Product 3</h4>
         <p class="price">₹999</p>
       </div>
     </div>
     <div class="product-card">
-      <img src="https://via.placeholder.com/200" alt="Product 4" />
+      <span class="offer-tag">Exciting Offer</span>
+      <img src="assets/Product4.jpg" alt="Product 4" />
       <div class="product-info">
         <h4>Product 4</h4>
         <p class="price">₹1299</p>
@@ -117,64 +142,117 @@
     </div>
   </section>
 
+  <!-- Deals Section -->
+  <section class="deal-section">
+    <h2>Top Deals On TVs & Appliances</h2>
+    <div class="product-scroll-container">
+      <div class="deal-card">
+        <img src="assets/product5.jpg" alt="Mobile 1" />
+        <p class="product-name">Godrej Refrigerator</p>
+        <p class="product-offer">From ₹12,999</p>
+      </div>
+      <div class="deal-card">
+        <img src="assets/product6.jpg" alt="Mobile 2" />
+        <p class="product-name">Double Door Refrigerator</p>
+        <p class="product-offer">Buy Now</p>
+      </div>
+      <div class="deal-card">
+        <img src="assets/product7.jpg" alt="Mobile 3" />
+        <p class="product-name">Semi Automatic Wash..</p>
+        <p class="product-offer">From ₹9,999</p>
+      </div>
+      <div class="deal-card">
+        <img src="assets/product8.jpg" alt="Mobile 4" />
+        <p class="product-name">Mini Refrigerator</p>
+        <p class="product-offer">Buy Now</p>
+      </div>
+      <div class="deal-card">
+        <img src="assets/product9.jpg" alt="Mobile 5" />
+        <p class="product-name">Front Load Washing M...</p>
+        <p class="product-offer">From ₹19,499</p>
+      </div>
+      <div class="deal-card">
+        <img src="assets/product1.jpg" alt="Mobile 6" />
+        <p class="product-name">Motorola G73</p>
+        <p class="product-offer">Buy Now</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="view-more-arrow"><i class="fas fa-chevron-down"></i></div>
+
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
+    <div class="footer-about">
+      <h3>About Flipkart Clone</h3>
+      <p>Flipkart Clone is your one-stop destination for all your shopping needs.</p>
+    </div>
     <div class="footer-links">
       <a href="#">About Us</a>
       <a href="#">Contact</a>
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
+      <a href="#">FAQs</a>
+    </div>
+    <div class="contact-info">
+      <p>Email: support@flipkartclone.com | Phone: +91-111111111</p>
+      <p>Address: 123 Market Street, Howrah</p>
     </div>
     <div class="social-icons">
-      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
-      <a href="#" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram-square"></i></a>
-      <a href="#" aria-label="YouTube"><i class="fab fa-youtube-square"></i></a>
+      <a href="#"><i class="fab fa-facebook-square"></i></a>
+      <a href="#"><i class="fab fa-twitter-square"></i></a>
+      <a href="#"><i class="fab fa-instagram-square"></i></a>
+      <a href="#"><i class="fab fa-youtube-square"></i></a>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Flipkart Clone. All rights reserved.</p>
     </div>
   </footer>
 
   <!-- Login Modal -->
-  <!-- Login Modal -->
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <div class="modal-body">
-      <div class="modal-image">
-        <img src="https://via.placeholder.com/300x400" alt="Login Visual" />
-      </div>
-      <div class="modal-form">
-        <h2>Login to Flipkart</h2>
-        <input type="text" placeholder="Enter Email or Mobile Number" />
-        <input type="password" placeholder="Enter Password" />
-        <button class="login-btn">Login</button>
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="modal-body">
+        <div class="modal-image">
+          <img src="assets/login.jpg" alt="Login Visual" />
+        </div>
+        <div class="modal-form">
+          <h2>Login to Flipkart</h2>
+          <input type="text" placeholder="Enter Email or Mobile Number" />
+          <input type="password" placeholder="Enter Password" />
+          <button class="login-btn">Login</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-
+  <!-- ✅ Script -->
   <script>
-    // Banner Data
     const banners = [
       {
         title: "Fun on wheels! Min. 40% Off",
         subtitle: "Electric ride-ons & more",
+        image: "assets/product6.jpg",
         background: "linear-gradient(45deg, #f2709c, #ff9472)"
       },
       {
         title: "Big Savings on Mobiles",
         subtitle: "Up to 60% off",
+        image: "assets/men11.jpg",
         background: "linear-gradient(45deg, #00c6ff, #0072ff)"
       },
       {
         title: "Fashion Fiesta",
         subtitle: "Flat 60% off on apparel",
+        image: "assets/product9.jpg",
         background: "linear-gradient(45deg, #f7971e, #ffd200)"
       }
     ];
 
     let currentBannerIndex = 0;
     const banner = document.getElementById('banner');
+    const bannerImage = document.getElementById('banner-image');
     const bannerTitle = document.getElementById('banner-title');
     const bannerSubtitle = document.getElementById('banner-subtitle');
     const prevBtn = document.getElementById('banner-prev');
@@ -183,6 +261,7 @@
     function updateBanner() {
       const current = banners[currentBannerIndex];
       banner.style.background = current.background;
+      bannerImage.src = current.image;
       bannerTitle.textContent = current.title;
       bannerSubtitle.textContent = current.subtitle;
     }
@@ -199,12 +278,10 @@
 
     prevBtn.addEventListener('click', prevBanner);
     nextBtn.addEventListener('click', nextBanner);
-
     updateBanner();
+    setInterval(nextBanner, 6000);
 
-    setInterval(nextBanner, 6000); // Auto-slide banner
-
-    // Modal login
+    // Modal Login
     const loginLink = document.getElementById('loginLink');
     const loginModal = document.getElementById('loginModal');
     const closeBtn = document.querySelector('.close-btn');
@@ -224,7 +301,7 @@
       }
     });
 
-    // Dropdown toggle
+    // Dropdown
     const dropdownToggle = document.querySelector('.dropdown-toggle');
     const dropdownMenu = document.querySelector('.dropdown-menu');
 
@@ -238,11 +315,43 @@
       }
     });
 
-    // ✅ Show login modal by default when the page loads
+    // Auto-show login modal (optional)
     window.addEventListener('DOMContentLoaded', () => {
-      loginModal.style.display = 'block';
+      // loginModal.style.display = 'block'; // uncomment to auto-show login
     });
-  </script>
 
+    // Dark Mode Logic
+    const themeToggle = document.getElementById('theme-toggle');
+  const savedTheme = localStorage.getItem('theme');
+
+  // Set theme on page load
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+    if (themeToggle) themeToggle.checked = true;
+  }
+
+  // Handle toggle
+  if (themeToggle) {
+    themeToggle.addEventListener('change', () => {
+      if (themeToggle.checked) {
+        document.documentElement.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  }
+
+    // Dark Mode Toggle Icon
+    const darkToggleIcon = document.querySelector('.dark-toggle i');
+    if (darkToggleIcon) {
+      themeToggle.addEventListener('change', () => {
+        darkToggleIcon.classList.toggle('fa-moon', !themeToggle.checked);
+        darkToggleIcon.classList.toggle('fa-sun', themeToggle.checked);
+      });
+    }
+  </script>
+ 
 </body>
 </html>

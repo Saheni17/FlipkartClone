@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishlist - Flipkart Clone</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f1f3f6;
+      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background-color: #2874f0;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .header-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: opacity 0.3s ease;
+    }
+
+    .header-nav a:hover {
+      opacity: 0.8;
+    }
+
+    .main-content {
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      gap: 30px;
+      align-items: flex-start;
+      min-height: calc(100vh - 100px);
+    }
+
+    .sidebar {
+      width: 260px;
+      position: sticky;
+      top: 80px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      height: fit-content;
+    }
+
+    .greeting {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px 10px;
+      color: #2874f0;
+      background-color: #f1f3f6;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .account-item.heading {
+      font-weight: 600;
+      font-size: 15px;
+      color: #888;
+      margin-top: 15px;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .account-item.heading:first-of-type {
+      border-top: none;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding-left: 10px;
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+
+    .sidebar ul li {
+      padding: 8px 12px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #e3f2fd;
+      color: #2874f0;
+      transform: translateX(5px);
+    }
+
+    .wishlist-container {
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .search-container {
+      flex: 1;
+      margin: 0 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #search-input {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      width: 60%;
+    }
+
+    .wishlist-list {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .wishlist-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 100%;
+      min-height: 200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .wishlist-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .wishlist-item img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .wishlist-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .wishlist-details {
+      flex-grow: 1;
+    }
+
+    .wishlist-details p {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .wishlist-details strong {
+      color: #388e3c;
+      font-size: 20px;
+    }
+
+    .wishlist-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .remove-btn, .add-btn {
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+      color: white;
+    }
+
+    .remove-btn {
+      background-color: #e53935;
+    }
+
+    .remove-btn:hover {
+      background-color: #c62828;
+    }
+
+    .add-btn {
+      background-color: #ff9f00;
+    }
+
+    .add-btn:hover {
+      background-color: #fb8c00;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: white;
+      margin-top: 40px;
+      border-top: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: #2874f0;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .preview-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-grow: 1;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 34px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2196f3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    .fas.fa-moon {
+      font-size: 18px;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    body.dark {
+      background-color: #1e1e2f;
+      color: #e0e0e0;
+    }
+
+    body.dark .sidebar {
+      background-color: #2b2b45;
+    }
+
+    body.dark .wishlist-item {
+      background-color: #2a2a3d;
+    }
+
+    body.dark .header {
+      background-color: #111827;
+    }
+
+    body.dark .remove-btn {
+      background-color: #d32f2f;
+    }
+
+    body.dark .add-btn {
+      background-color: #f57c00;
+    }
+
+    body.dark .wishlist-details p,
+    body.dark .wishlist-details strong {
+      color: #fff;
+    }
+
+    body.dark .fas.fa-moon {
+      color: #f1c40f;
+    }
+    body.dark .sidebar ul li {
+  color: #e0e0e0;
+}
+
+body.dark .sidebar ul li:hover {
+  background-color: #394867;
+  color: #ffd369;
+}
+    body.dark .header-nav a {
+      color: #e0e0e0;
+    }
+
+    @media (max-width: 900px) {
+      .main-content {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+      }
+
+      .wishlist-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .wishlist-actions {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      #search-input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .search-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+       /* Toast styles */
+    #toast {
+      visibility: hidden;
+      min-width: 280px;
+      background-color: #333;
+      color: #fff;
+      text-align: left;
+      border-radius: 6px;
+      padding: 14px 20px;
+      position: fixed;
+      z-index: 9999;
+      top: 20px;
+      right: 20px;
+      font-size: 15px;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      transition: opacity 0.6s, visibility 0.6s;
+    }
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    #toast .icon {
+      font-size: 18px;
+      color: #00e676;
+    }
+
+    /* Dark mode support */
+    body.dark #toast {
+      background-color: #222;
+      color: #fff;
+    }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><i class="fas fa-heart"></i> Wishlist</div>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search wishlist...">
+      <i class="fas fa-moon" title="Toggle Dark Mode"></i>
+      <label class="switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <nav class="header-nav">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+    </nav>
+  </header>
++
+  <div class="main-content">
+    <aside class="sidebar">
+      <div class="greeting">
+        <i class="fas fa-user-circle"></i>
+        <span><strong>Hello, User</strong></span>
+      </div>
+      <div class="account-section">
+        <div class="account-item heading"><i class="fas fa-box"></i> <span>My Orders</span></div>
+        <div class="account-item heading"><i class="fas fa-user"></i> <span>Account Settings</span></div>
+        <ul>
+          <li>Profile Information</li>
+          <li>Manage Addresses</li>
+          <li>PAN Card Information</li>
+        </ul>
+        <div class="account-item heading"><i class="fas fa-credit-card"></i> <span>Payments</span></div>
+        <ul>
+          <li>Gift Cards <span style="color: green; float: right;">₹0</span></li>
+          <li>Saved UPI</li>
+          <li>Saved Cards</li>
+        </ul>
+        <div class="account-item heading"><i class="fas fa-folder-open"></i> <span>My Stuff</span></div>
+        <ul>
+          <li>My Coupons</li>
+          <li>My Reviews & Ratings</li>
+        </ul>
+        <div class="account-item heading"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></div>
+      </div>
+    </aside>
+
+    <section class="wishlist-container">
+      <div class="wishlist-list" id="wishlist-list"></div>
+    </section>
+  </div>
+
+  <div id="toast"><i class="fas fa-check-circle icon"></i> <span id="toast-message">Item added to cart</span></div>
+
+  <footer>
+    <a href="mens-topwear.html"><i class="fas fa-arrow-left"></i> Go Back</a>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const wishlistContainer = document.getElementById("wishlist-list");
+
+      // Toast message
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        const toastMsg = document.getElementById("toast-message");
+        toastMsg.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      // Populate wishlist
+      if (wishlist.length === 0) {
+        wishlistContainer.innerHTML = "<p style='text-align:center;'>Your wishlist is empty.</p>";
+        return;
+      }
+
+      wishlist.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "wishlist-item";
+        div.innerHTML = `
+          <a class="preview-link" href="product.html?id=${item.id}">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="wishlist-details">
+              <p>${item.name}<br><strong>₹${item.price}</strong></p>
+            </div>
+          </a>
+          <div class="wishlist-actions">
+            <button class="remove-btn" data-id="${item.id}">Remove</button>
+            <button class="add-btn" data-id="${item.id}">Add to Cart</button>
+          </div>
+        `;
+        wishlistContainer.appendChild(div);
+      });
+
+      // Remove from wishlist
+      document.querySelectorAll(".remove-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const id = button.getAttribute("data-id");
+          const updatedWishlist = wishlist.filter(item => item.id !== id);
+          localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+          showToast("Item removed from wishlist");
+          setTimeout(() => location.reload(), 1000);
+        });
+      });
+
+      // Add to cart
+      document.querySelectorAll(".add-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const id = button.getAttribute("data-id");
+          const itemToAdd = wishlist.find(item => item.id === id);
+          const alreadyInCart = cart.some(item => item.id === id);
+          if (!alreadyInCart) {
+            cart.push(itemToAdd);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            showToast(`${itemToAdd.name} added to cart`);
+          } else {
+            showToast(`${itemToAdd.name} is already in your cart`);
+          }
+        });
+      });
+
+      // Search functionality
+      document.getElementById("search-input").addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        document.querySelectorAll(".wishlist-item").forEach(item => {
+          const name = item.querySelector(".wishlist-details p").textContent.toLowerCase();
+          item.style.display = name.includes(query) ? "flex" : "none";
+        });
+      });
+
+      // Theme toggle logic
+      const toggle = document.getElementById("theme-toggle");
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+        toggle.checked = true;
+      }
+
+      toggle.addEventListener("change", () => {
+        document.body.classList.toggle("dark");
+        localStorage.setItem("darkMode", toggle.checked);
+      });
+    });
+  </script>
+
+  <style>
+    /* Add minimal toast style for better effect */
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #323232;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 5px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    #toast.show {
+      display: flex;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes fadeout {
+      from {opacity: 1;}
+      to {opacity: 0;}
+    }
+
+    body.dark {
+      background-color: #121212;
+      color: white;
+    }
+
+    body.dark .header, body.dark .sidebar, body.dark .wishlist-container {
+      background-color: #1e1e1e;
+    }
+
+    body.dark a, body.dark button {
+      color: white;
+    }
+  </style>
+</body>
+
+</html>
+
+
